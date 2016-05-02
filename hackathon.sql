@@ -1,80 +1,71 @@
+-- HPE SILCA HACKATHON 2016			--
+-- MY OWN PRIVATE BANK				--
+-- SUPPORT: etienne.cointet@hpe.com --
+
+-- phpMyAdmin SQL Dump
+-- version 4.5.0.2
+-- http://www.phpmyadmin.net
 --
--- Datenbank: `hackathon`
+-- Host: 10.0.0.4:3306
+-- Generation Time: May 02, 2016 at 04:46 PM
+-- Server version: 5.5.43-0ubuntu0.12.04.1-log
+-- PHP Version: 5.5.23-1+deb.sury.org~precise+2
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `d9d0a933534f0489bb81dbaa9da916c19`
 --
 
 -- --------------------------------------------------------
 
 --
--- Tabellenstruktur für Tabelle `bank_account`
+-- Table structure for table `bank_account`
 --
 
 CREATE TABLE `bank_account` (
-  `__account_id` int(11) NOT NULL,
-  `pre_name` text,
-  `last_name` text,
-  `login_name` text,
-  `balance` decimal(60,2) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `id` int(11) NOT NULL  AUTO_INCREMENT,
+  `name` varchar(30) NOT NULL,
+  `email` varchar(30) NOT NULL,
+  `pwd` varchar(15) NOT NULL,
+  `balance` float NOT NULL DEFAULT '0',
+	PRIMARY KEY (ID)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Information regarding the users and credentials';
+
+--
+-- Dumping data for table `bank_account`
+--
+
+INSERT INTO `bank_account` (`id`, `name`, `email`, `pwd`, `balance`) VALUES
+(1, 'Lara Croft', 'lara.croft@wanadoo.fr', 'lara', 55000),
+(2, 'Mario Bross', 'mario.bross@voila.fr', 'mario', 2500);
 
 -- --------------------------------------------------------
 
 --
--- Tabellenstruktur für Tabelle `transaction`
+-- Table structure for table `bank_transac`
 --
 
-CREATE TABLE `transaction` (
-  `__transaction_id` int(11) NOT NULL,
-  `source` int(11) DEFAULT NULL,
-  `target` int(11) DEFAULT NULL,
-  `value` int(11) DEFAULT NULL,
-  `purpose` text,
-  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `_executive_account_id` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+CREATE TABLE `bank_transac` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id transac',
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Autofill Timestamp',
+  `amount` int(11) NOT NULL,
+  `from_id` int(11) NOT NULL COMMENT 'ID account from',
+  `to_id` int(11) NOT NULL COMMENT 'ID account to',
+  PRIMARY KEY (ID)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='All bank transactions';
 
 --
--- Indizes der exportierten Tabellen
+-- Dumping data for table `bank_transac`
 --
 
---
--- Indizes für die Tabelle `bank_account`
---
-ALTER TABLE `bank_account`
-  ADD PRIMARY KEY (`__account_id`),
-  ADD KEY `account_id` (`__account_id`);
-
---
--- Indizes für die Tabelle `transaction`
---
-ALTER TABLE `transaction`
-  ADD PRIMARY KEY (`__transaction_id`),
-  ADD KEY `transaction_id` (`__transaction_id`),
-  ADD KEY `executive_account_id` (`_executive_account_id`);
-
---
--- AUTO_INCREMENT für exportierte Tabellen
---
-
---
--- AUTO_INCREMENT für Tabelle `bank_account`
---
-ALTER TABLE `bank_account`
-  MODIFY `__account_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
---
--- AUTO_INCREMENT für Tabelle `transaction`
---
-ALTER TABLE `transaction`
-  MODIFY `__transaction_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
---
--- Constraints der exportierten Tabellen
---
-
---
--- Constraints der Tabelle `transaction`
---
-ALTER TABLE `transaction`
-  ADD CONSTRAINT `transaction_ibfk_1` FOREIGN KEY (`_executive_account_id`) REFERENCES `bank_account` (`__account_id`);
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+INSERT INTO `bank_transac` ( `timestamp`, `amount`, `from_id`, `to_id`) VALUES
+('2016-05-02 14:45:53', 500, 1, 2),
+('2016-05-02 14:46:05', 150, 1, 2);

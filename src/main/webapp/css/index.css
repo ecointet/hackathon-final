@@ -1,0 +1,58 @@
+@font-face {
+    font-family: 'Metric';
+    src: url('Metric-Font/MetricApp-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'MetricBold';
+    src: url('Metric-Font/MetricApp-Bold.ttf');
+}
+
+@font-face {
+	font-family: 'MetricLight'; 
+	src: url('Metric-Font/MetricApp-Light.ttf');
+}
+#button_row{
+	-webkit-column-span: all;
+	column-span: all;
+	display: table-cell;
+	vertical-align: middle;
+	text-align:center;
+}
+table{
+	text-align:left;
+	margin-left: auto;
+ 	margin-right: auto;
+}
+
+ body{
+ 	font-family: "Metric";			
+ 	background-color: #C6C9CA;
+ 	text-align: center;
+	font-size: 1.4em;
+	font-weight: bold;
+}
+
+h1{
+	color: rgb(	0, 169, 130);
+}
+
+	 
+.logo{
+	position: relative;
+	width: 30%;								 				
+}
+.buttons{
+  border: none;
+  padding: 15px 25px;
+  font-size: 22px;
+  text-decoration: none;
+  margin: 20px;
+  color: #fff;
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  background-color: #00A982;
+	
+}
+

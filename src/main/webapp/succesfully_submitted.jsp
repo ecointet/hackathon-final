@@ -10,6 +10,7 @@
 <body>
 	<div class = "box_logo">
 		<img src= "/images/logo.png" class ="logo"/>
+		<img src= "/images/silca.png" class ="logo"/>
 	</div>
 	<div class ="box_main_part">
 	  	<h1>	

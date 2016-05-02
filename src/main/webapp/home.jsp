@@ -10,10 +10,11 @@
 <body>
 	<div class = "box_logo">
 		<img src= "/images/logo.png" class ="logo"/>
+		<img src= "/images/silca.png" class ="logo"/>
 	</div>
 	<div class ="box_main_part">
 	  	<h1>	
-	  			Welcome to this Java Web MySQL demo!
+	  			MY BANKING APP IS AMAZING!
 	  	</h1>			  
 				<a href="/do_transaction.jsp"><button class ="buttons" >Do a transaction</button></a>
 			<br/><br/><br/>

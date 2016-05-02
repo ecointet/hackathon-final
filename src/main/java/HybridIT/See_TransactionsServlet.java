@@ -12,13 +12,12 @@ import java.sql.*;
 public class See_TransactionsServlet extends HttpServlet {
 		private PrintWriter output;
 		private String returnSet;
-	
-		private String DBNAME= "df053859313094d5689c2bf8acf85cad2";
-		private String HOSTNAME= "10.0.0.4";
-		private String USER = "u9pc7tLiPYlPr";
-		private String PASSWORD = "ppx43CvRxSJzH";
-		private String PORT= "3306";
-		
+
+	private String DBNAME= "d9d0a933534f0489bb81dbaa9da916c19";
+	private String HOSTNAME= "10.0.0.4";
+	private String USER = "uRMkUcYBHJVwh";
+	private String PASSWORD = "pBoATDqho8IFh";
+	private String PORT= "3306";
 		
 		
 		private static final long serialVersionUID = 1L;
@@ -42,9 +41,9 @@ public class See_TransactionsServlet extends HttpServlet {
 			returnSet = "<!DOCTYPE html> <html> <head> <meta charset=\"utf-8\"> <title> Java Demo. </title> <link rel=\"stylesheet\" type=\"text/css\" href=\"/css/index.css\"> </head> <body> <div class = \"box_logo\"> <img src= \"/images/logo.png\" class =\"logo\"/> </div> <div class =\"box_main_part\"><h1> Available transactions on this server: </h1>";
 			
 			try {
-				transactionsTable = sqlStatement.executeQuery("SELECT * FROM `transaction`");
+				transactionsTable = sqlStatement.executeQuery("SELECT * FROM `bank_transac`");
 				/*Setup of resulting table... */
-				returnSet = returnSet + "<table><tr><td>Transact. ID</td><td>Source</td><td>Target</td><td>Value</td><td>Purpose</td><td>Timestamp</td></tr>";
+				returnSet = returnSet + "<table><tr><td>Transact. ID</td><td>Timestamp</td><td>Amount</td><td>Source ID</td><td>Target ID</td></tr>";
 				/*Go through the table row wise...*/
 				while(transactionsTable.next()){
 					returnSet = returnSet + "<tr>";
@@ -84,22 +83,34 @@ public class See_TransactionsServlet extends HttpServlet {
 					ex.printStackTrace();
 				}
 			}
-			
-			private void checkDbAvailability(){
-				try{
-					sqlStatement.executeUpdate("CREATE TABLE `bank_account` ( `__account_id` int(11) NOT NULL, `pre_name` text, `last_name` text, `login_name` text, `balance` decimal(60,2) DEFAULT NULL ) ENGINE=InnoDB DEFAULT CHARSET=latin1;");
-					sqlStatement.executeUpdate("ALTER TABLE `bank_account` MODIFY `__account_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2, ADD PRIMARY KEY (`__account_id`), ADD KEY `account_id` (`__account_id`);");		
-					bankAccountTable = sqlStatement.executeQuery("SELECT * FROM `bank_account`");
-				}catch (SQLException e) {
-					System.out.println("\t Skip - Bankaccount table already exists.\n");
-				}
-				try{
-					sqlStatement.executeUpdate("CREATE TABLE `transaction` ( `__transaction_id` int(11) NOT NULL, `source` int(11) DEFAULT NULL, `target` int(11) DEFAULT NULL, `value` int(11) DEFAULT NULL, `purpose` text, `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP, `_executive_account_id` int(11) DEFAULT NULL ) ENGINE=InnoDB DEFAULT CHARSET=latin1;");
-		        	sqlStatement.executeUpdate("ALTER TABLE `transaction` ADD PRIMARY KEY (`__transaction_id`), ADD KEY `transaction_id` (`__transaction_id`), ADD KEY `executive_account_id` (`_executive_account_id`), MODIFY `__transaction_id` int(11) NOT NULL AUTO_INCREMENT, ADD CONSTRAINT `transaction_ibfk_1` FOREIGN KEY (`_executive_account_id`) REFERENCES `bank_account` (`__account_id`);");
-		        	transactionsTable = sqlStatement.executeQuery("SELECT * FROM `transaction`");
-				} catch (SQLException e) {
-					System.out.println("\t Skip - Transaction table already exists.\n");
-				}
-			}
+
+	private void checkDbAvailability(){
+		try{
+			sqlStatement.executeUpdate("CREATE TABLE `bank_account` (\n" +
+					"  `id` int(11) NOT NULL  AUTO_INCREMENT,\n" +
+					"  `name` varchar(30) NOT NULL,\n" +
+					"  `email` varchar(30) NOT NULL,\n" +
+					"  `pwd` varchar(15) NOT NULL,\n" +
+					"  `balance` float NOT NULL DEFAULT '0',\n" +
+					"\tPRIMARY KEY (ID)\n" +
+					") ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Information regarding the users and credentials';");
+			bankAccountTable = sqlStatement.executeQuery("SELECT * FROM `bank_account`");
+		}catch (SQLException e) {
+			System.out.println("\t Skip - Bankaccount table already exists.\n");
+		}
+		try{
+			sqlStatement.executeUpdate("CREATE TABLE `bank_transac` (\n" +
+					"  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id transac',\n" +
+					"  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Autofill Timestamp',\n" +
+					"  `amount` int(11) NOT NULL,\n" +
+					"  `from_id` int(11) NOT NULL COMMENT 'ID account from',\n" +
+					"  `to_id` int(11) NOT NULL COMMENT 'ID account to',\n" +
+					"  PRIMARY KEY (ID)\n" +
+					") ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='All bank transactions';");
+			transactionsTable = sqlStatement.executeQuery("SELECT * FROM `bank_transac`");
+		} catch (SQLException e) {
+			System.out.println("\t Skip - Transaction table already exists.\n");
+		}
+	}
 
 }

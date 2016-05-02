@@ -10,6 +10,7 @@
 <body>
 	<div class = "box_logo">
 		<img src= "/images/logo.png" class ="logo"/>
+		<img src= "/images/silca.png" class ="logo"/>
 	</div>
 	<div class ="box_main_part">
 	  	<h1>	
@@ -20,17 +21,21 @@
 	  		<form action="home" method="post" >
 	  			<table>
 		  			<tr>
-				  		<td>Prename:</td>
-				  		<td><input type = "text" name = "prename" ></td>
+				  		<td>Your Full Name:</td>
+				  		<td><input type = "text" name = "name" ></td>
 				  	</tr>
 				  	<tr>
-			  			<td>Lastname:</td>
-			  			<td><input type = "text" name = "lastname"></td>
+			  			<td>Your Email:</td>
+			  			<td><input type = "text" name = "email"></td>
 			  		</tr>
 			  		<tr>
-			  			<td>Login Name:</td>
-			  			<td><input type = "text" name = "login_name"></td>
-			  		</tr>	  						  
+			  			<td>Your Password:</td>
+			  			<td><input type = "text" name = "pwd"></td>
+			  		</tr>
+					<tr>
+						<td>Your Balance:</td>
+						<td><input type = "text" name = "balance"></td>
+					</tr>
 					<tr>
 						<td colspan="2" id="button_row" ><button class ="buttons" >Create a user account</button></td>
 					</tr>

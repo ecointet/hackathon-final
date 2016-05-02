@@ -1,0 +1,4 @@
+name: java-demo-app-mysql
+description: This demo application shows how to realize a Java Web application in a cloud native environment connected to a SQL database.
+memory: 512M
+buildpack: https://github.com/heroku/heroku-buildpack-java.git

@@ -10,6 +10,7 @@
 <body>
 	<div class = "box_logo">
 		<img src= "/images/logo.png" class ="logo"/>
+		<img src= "/images/silca.png" class ="logo"/>
 	</div>
 	<div class ="box_main_part">
 	  	<h1>	
@@ -19,21 +20,18 @@
 	  		<form action="succesfully_submitted" method="post" >
 	  			<table>
 		  			<tr>
-				  		<td>Your Account ID:</td>
-				  		<td><input type = "text" name = "source" required="required"></td>
+				  		<td>Source Account ID:</td>
+				  		<td><input type = "text" name = "from_id" required="required"></td>
 				  	</tr>
 				  	<tr>
 			  			<td>Target Account ID:</td>
-			  			<td><input type = "text" name = "target" required="required"></td>
+			  			<td><input type = "text" name = "to_id" required="required"></td>
 			  		</tr>
 			  		<tr>
 			  			<td>Value of this transaction:</td>
-			  			<td><input type = "text" name = "value" required="required"></td>
+			  			<td><input type = "text" name = "amount" required="required"></td>
 			  		</tr>	  
-			  		<tr>
-			  			<td>Purpose:</td>
-			  			<td><input type = "text" name = "purpose" ></td>
-			  		</tr>	  						  
+
 					<tr>
 						<td colspan="2" id="button_row" ><button class ="buttons" >Submit</button></td>
 					</tr>

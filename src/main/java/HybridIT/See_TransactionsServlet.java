@@ -25,7 +25,7 @@ public class See_TransactionsServlet extends HttpServlet {
     private ResultSet bankAccountTable;
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int numberOfColumns = 6;
+        int numberOfColumns = 5;
 
 			/*Connect to db*/
         openDbSession();

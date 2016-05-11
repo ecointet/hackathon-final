@@ -13,8 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.sql.*;
 
-
-public class See_TransactionsServlet extends HttpServlet {
+public class Successfully_SubmittedServlet extends HttpServlet {
     private PrintWriter output;
     private String returnSet;
 
@@ -22,46 +21,52 @@ public class See_TransactionsServlet extends HttpServlet {
     private Connection mySqlConnection;
     private Statement sqlStatement;
     private ResultSet transactionsTable;
+    private DatabaseMetaData metaInformation;
     private ResultSet bankAccountTable;
 
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int numberOfColumns = 6;
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String amount;
+        String from_id;
+        String to_id;
+
+        amount = request.getParameter("amount");
+        from_id = request.getParameter("from_id");
+        to_id = request.getParameter("to_id");
 
 			/*Connect to db*/
         openDbSession();
             /*Check if DB is available & has correct setup*/
         checkDbAvailability();
-            /*Do something with DB...*/
-
-        output = response.getWriter();
-
-        returnSet = "<!DOCTYPE html> <html> <head> <meta charset=\"utf-8\"> <title> Java Demo. </title> <link rel=\"stylesheet\" type=\"text/css\" href=\"/css/index.css\"> </head> <body> <div class = \"box_logo\"> <img src= \"/images/logo.png\" class =\"logo\"/> </div> <div class =\"box_main_part\"><h1> Available transactions on this server: </h1>";
+			/*Do something with DB...*/
 
         try {
+            PreparedStatement preparedSqlStatement = mySqlConnection.prepareStatement("INSERT INTO `bank_transac` (amount, from_id, to_id) VALUES(?,?,?)");
+            preparedSqlStatement.setString(1, amount);
+            preparedSqlStatement.setString(2, from_id);
+            preparedSqlStatement.setString(3, to_id);
+            preparedSqlStatement.executeUpdate();
             transactionsTable = sqlStatement.executeQuery("SELECT * FROM `bank_transac`");
-                /*Setup of resulting table... */
-            returnSet = returnSet + "<table><tr><td>Transact. ID</td><td>Timestamp</td><td>Amount</td><td>Source ID</td><td>Target ID</td></tr>";
-				/*Go through the table row wise...*/
-            while (transactionsTable.next()) {
-                returnSet = returnSet + "<tr>";
-					
-					/*Print the value column wise... */
-                for (int i = 1; i <= numberOfColumns; i++) {
-                    returnSet = returnSet + "<td>" + transactionsTable.getString(i) + "</td>";
-                }
-
-                returnSet = returnSet + "</tr>";
-            }
-            returnSet = returnSet + "</table>";
+            System.out.println("\n Successfully transmitted transaction for: \t" + from_id + "\t to: \t" + to_id + "\n");
         } catch (SQLException e) {
+            System.out.println("\n Failed creating transaction for: \t" + from_id + "\t to: \t" + to_id + "\n");
             e.printStackTrace();
-            returnSet = returnSet + "<br/><br/>Failed to retrieve data<br/><br/>";
         }
 
-        returnSet = returnSet + "<a href=\"/home.jsp\"><button class =\"buttons\" >Back to start</button></a>";
+
+        output = response.getWriter();
+        returnSet = "<!DOCTYPE html> <html> <head> <meta charset=\"utf-8\"> <title> Java Demo. </title> <link rel=\"stylesheet\" type=\"text/css\" href=\"/css/index.css\"> </head> <body> <div class = \"box_logo\"> <img src= \"/images/logo.png\" class =\"logo\"/> </div> <div class =\"box_main_part\">";
+        returnSet = returnSet + "<h1> Successfully submitted. </h1> What do you want to do? <br/><br/> <form action=\"do_transaction\" method=\"post\" ><button class =\"buttons\" >Do a transaction!</button></form> <br/><br/><br/> <form action=\"see_transactions\" method=\"get\"> Want to see all transactions on this server? <br/><button class =\"buttons\" >See all transactions on this server</button></form> <form action=\"see_bankaccounts\" method=\"get\"><button class=\"buttons\">See all bank accounts on this server</button></form><a href=\"/home.jsp\"><button class =\"buttons\" >Back to Start</button></a> ";
         returnSet = returnSet + "</div></body></html>";
         output.println(returnSet);
     }
+		
+		/*public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+			output = response.getWriter();
+			returnSet = "<!DOCTYPE html> <html> <head> <meta charset=\"utf-8\"> <title> Java Demo. </title> <link rel=\"stylesheet\" type=\"text/css\" href=\"/css/index.css\"> </head> <body> <div class = \"box_logo\"> <img src= \"/images/logo.png\" class =\"logo\"/> </div> <div class =\"box_main_part\">";
+			returnSet = returnSet + "<h1> Succesfully submitted. </h1> What do you want to do? <br/><br/> <form action=\"do_transaction\" method=\"post\" ><button class =\"buttons\" >Do a transaction!</button></form> <br/><br/><br/> <form action=\"successfully_submitted\" method=\"get\"> Want to retrieve your data? <br/> <button class =\"buttons\" >See all transactions on this server</button></form> <a href=\"/home.jsp\"><button class =\"buttons\" >Back to Start</button></a> ";
+			returnSet = returnSet + "</div></body></html>";
+			output.println(returnSet);
+		}*/
 
 
     private void openDbSession() {
@@ -77,9 +82,7 @@ public class See_TransactionsServlet extends HttpServlet {
 
         if (stackato_services != null && stackato_services.length() > 0) {
             try {
-                System.out.println(stackato_services);
                 JsonRootNode root = new JdomParser().parse(stackato_services);
-                System.out.println(root.toString());
                 JsonNode credentials = root.getNode("mysql").getElements().get(0).getNode("credentials");
 
                 dbname = credentials.getStringValue("name");

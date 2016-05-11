@@ -17,7 +17,7 @@
 	  			Do a transaction:
 	  	</h1>
 	  	<br/><br/><br/>	
-	  		<form action="succesfully_submitted" method="post" >
+	  		<form action="successfully_submitted" method="post" >
 	  			<table>
 		  			<tr>
 				  		<td>Source Account ID:</td>

@@ -1,90 +1,90 @@
 <!DOCTYPE web-app PUBLIC
- "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
- "http://java.sun.com/dtd/web-app_2_3.dtd" >
+        "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+        "http://java.sun.com/dtd/web-app_2_3.dtd" >
 
 <web-app>
-  <display-name>Java Web App Demo</display-name>
-  <!-- =========================================== -->
-  <!-- =========================================== -->
-  <!-- =========================================== -->
-  
-   <servlet>
-	      <servlet-name>
-	        HomeServlet
-	      </servlet-name>
-	      <servlet-class>
-	          HybridIT.HomeServlet
-	      </servlet-class>
-	</servlet>
-	
-   <!-- =========================================== -->
-  
-	 <servlet>
-      <servlet-name>
-          See_TransactionsServlet
-      </servlet-name>
-      <servlet-class>
-          HybridIT.See_TransactionsServlet
-      </servlet-class>
-      </servlet>
-      
-  <!-- =========================================== -->
-      
-	  <servlet>
-       <servlet-name>
-          Succesfully_SubmittedServlet
-        </servlet-name>
-      <servlet-class>
-          HybridIT.Succesfully_SubmittedServlet
-      </servlet-class>
-      </servlet>
-      
-  <!-- =========================================== -->
-  
-  	  <servlet>
-       <servlet-name>
-          See_BankaccountsServlet
-        </servlet-name>
-      <servlet-class>
-          HybridIT.See_BankaccountsServlet
-      </servlet-class>
-      </servlet>
-   
-  <!-- =========================================== -->
-  <!-- =========================================== -->   
-  <!-- =========================================== -->   
-	
-	   <servlet-mapping>
-	          <servlet-name>HomeServlet</servlet-name>
-	      	  <url-pattern>/home</url-pattern>
-	   </servlet-mapping>
+    <display-name>Java Web App Demo</display-name>
+    <!-- =========================================== -->
+    <!-- =========================================== -->
+    <!-- =========================================== -->
 
-  <!-- =========================================== -->
-	   
-     <servlet-mapping>
-          <servlet-name>See_TransactionsServlet</servlet-name>
-          <url-pattern>/see_transactions</url-pattern>
-     </servlet-mapping>
-     
-  <!-- =========================================== -->   
-     
-   <servlet-mapping>
-          <servlet-name>Succesfully_SubmittedServlet</servlet-name>
-          <url-pattern>/succesfully_submitted</url-pattern> 
-   </servlet-mapping>
-   
-   <!-- =========================================== -->
-   
-     <servlet-mapping>
-          <servlet-name>See_BankaccountsServlet</servlet-name>
-          <url-pattern>/see_bankaccounts</url-pattern> 
-   </servlet-mapping>
-    
-  <!-- =========================================== -->
-  <!-- =========================================== -->
-  <!-- =========================================== -->
-      
-  <welcome-file-list>
-    <welcome-file>index.jsp</welcome-file>
-  </welcome-file-list>
+    <servlet>
+        <servlet-name>
+            HomeServlet
+        </servlet-name>
+        <servlet-class>
+            HybridIT.HomeServlet
+        </servlet-class>
+    </servlet>
+
+    <!-- =========================================== -->
+
+    <servlet>
+        <servlet-name>
+            See_TransactionsServlet
+        </servlet-name>
+        <servlet-class>
+            HybridIT.See_TransactionsServlet
+        </servlet-class>
+    </servlet>
+
+    <!-- =========================================== -->
+
+    <servlet>
+        <servlet-name>
+            Successfully_SubmittedServlet
+        </servlet-name>
+        <servlet-class>
+            HybridIT.Successfully_SubmittedServlet
+        </servlet-class>
+    </servlet>
+
+    <!-- =========================================== -->
+
+    <servlet>
+        <servlet-name>
+            See_BankaccountsServlet
+        </servlet-name>
+        <servlet-class>
+            HybridIT.See_BankaccountsServlet
+        </servlet-class>
+    </servlet>
+
+    <!-- =========================================== -->
+    <!-- =========================================== -->
+    <!-- =========================================== -->
+
+    <servlet-mapping>
+        <servlet-name>HomeServlet</servlet-name>
+        <url-pattern>/home</url-pattern>
+    </servlet-mapping>
+
+    <!-- =========================================== -->
+
+    <servlet-mapping>
+        <servlet-name>See_TransactionsServlet</servlet-name>
+        <url-pattern>/see_transactions</url-pattern>
+    </servlet-mapping>
+
+    <!-- =========================================== -->
+
+    <servlet-mapping>
+        <servlet-name>Successfully_SubmittedServlet</servlet-name>
+        <url-pattern>/successfully_submitted</url-pattern>
+    </servlet-mapping>
+
+    <!-- =========================================== -->
+
+    <servlet-mapping>
+        <servlet-name>See_BankaccountsServlet</servlet-name>
+        <url-pattern>/see_bankaccounts</url-pattern>
+    </servlet-mapping>
+
+    <!-- =========================================== -->
+    <!-- =========================================== -->
+    <!-- =========================================== -->
+
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
 </web-app>
